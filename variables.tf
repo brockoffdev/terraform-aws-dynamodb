@@ -1,3 +1,8 @@
+variable "enabled" {
+  default = true
+  description = "enables/disables creation of resources"
+}
+
 variable "namespace" {
   type        = "string"
   description = "Namespace (e.g. `eg` or `cp`)"
@@ -103,8 +108,7 @@ variable "ttl_attribute" {
 }
 
 variable "enable_autoscaler" {
-  type        = "string"
-  default     = "true"
+  default     = true
   description = "Flag to enable/disable DynamoDB autoscaling"
 }
 
