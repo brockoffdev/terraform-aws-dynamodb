@@ -1,5 +1,5 @@
 module "dynamodb_label" {
-  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.1.6"
+  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=tags/0.2.1"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "${var.name}"
@@ -12,11 +12,11 @@ locals {
   attributes = [
     {
       name = "${var.range_key}"
-      type = "S"
+      type = "${var.range_key_type}"
     },
     {
       name = "${var.hash_key}"
-      type = "S"
+      type = "${var.hash_key_type}"
     },
     "${var.dynamodb_attributes}",
   ]
@@ -54,7 +54,7 @@ resource "aws_dynamodb_table" "default" {
   hash_key         = "${var.hash_key}"
   range_key        = "${var.range_key}"
   stream_enabled   = "${var.enable_streams}"
-  stream_view_type = "${var.stream_view_type}"
+  stream_view_type = "${var.enable_streams == "true" ? var.stream_view_type : ""}"
 
   server_side_encryption {
     enabled = "${var.enable_encryption}"
@@ -81,8 +81,8 @@ resource "aws_dynamodb_table" "default" {
 }
 
 module "dynamodb_autoscaler" {
-  source                       = "git::https://github.com/cloudposse/terraform-aws-dynamodb-autoscaler.git?ref=tags/0.2.4"
-  enabled                      = "${var.enabled && var.enable_autoscaler ? "true" : "false"}"
+  source                       = "git::https://github.com/cloudposse/terraform-aws-dynamodb-autoscaler.git?ref=tags/0.2.5"
+  enabled                      = "${var.enable_autoscaler}"
   namespace                    = "${var.namespace}"
   stage                        = "${var.stage}"
   name                         = "${var.name}"
