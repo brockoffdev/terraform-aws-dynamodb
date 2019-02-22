@@ -120,8 +120,9 @@ variable "ttl_attribute" {
 }
 
 variable "enable_autoscaler" {
-  default     = true
-  description = "Flag to enable/disable DynamoDB autoscaling"
+  type        = "string"
+  default     = "true"
+  description = "Enable DynamoDB autoscaling"
 }
 
 variable "dynamodb_attributes" {
