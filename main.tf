@@ -81,7 +81,7 @@ resource "aws_dynamodb_table" "default" {
 }
 
 module "dynamodb_autoscaler" {
-  source                       = "git::https://github.com/cloudposse/terraform-aws-dynamodb-autoscaler.git?ref=tags/0.2.5"
+  source                       = "git::https://github.com/brockoffdev/terraform-aws-dynamodb-autoscaler.git?ref=tags/0.2.6"
   enabled                      = "${var.enabled ? "${var.enable_autoscaler}" : "false"}"
   namespace                    = "${var.namespace}"
   stage                        = "${var.stage}"
