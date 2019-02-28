@@ -13,16 +13,6 @@ output "table_arn" {
   description = "DynamoDB table ARN"
 }
 
-output "global_secondary_index_names" {
-  value       = ["${join("", null_resource.global_secondary_index_names.*.triggers.name)}"]
-  description = "DynamoDB secondary index names"
-}
-
-output "local_secondary_index_names" {
-  value       = ["${join("", null_resource.local_secondary_index_names.*.triggers.name)}"]
-  description = "DynamoDB local index names"
-}
-
 output "table_stream_arn" {
   value       = "${join("", aws_dynamodb_table.default.*.stream_arn)}"
   description = "DynamoDB table stream ARN"
