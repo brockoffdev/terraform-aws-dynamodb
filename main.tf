@@ -70,7 +70,6 @@ module "dynamodb_autoscaler" {
   attributes                   = "${var.attributes}"
   dynamodb_table_name          = "${join("", aws_dynamodb_table.default.*.id)}"
   dynamodb_table_arn           = "${join("", aws_dynamodb_table.default.*.arn)}"
-  dynamodb_indexes             = ["${join("", null_resource.global_secondary_index_names.*.triggers.name)}"]
   autoscale_write_target       = "${var.autoscale_write_target}"
   autoscale_read_target        = "${var.autoscale_read_target}"
   autoscale_min_read_capacity  = "${var.autoscale_min_read_capacity}"
